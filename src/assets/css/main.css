@@ -1,0 +1,245 @@
+.carousel, .carousel-inner img {
+    height: 600px;
+    width: 100%;
+} 
+.login,
+.image {
+  min-height: 100vh;
+}
+.bg-image {
+  background-image: url('../img/vegetable1.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+/******Image Gallery******/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: helvetica;
+  position: relative;
+  font-size: 100%;
+  
+}
+
+.gallery-container {
+  padding: 0.9375rem 0;
+}
+
+.gallery-container h1 {
+  margin: 2rem 0;
+  padding: 0;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 6.5vw;
+  font-weight: lighter;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns:auto auto auto auto;
+  grid-gap: 8px;
+  width: 100%;
+}
+@media (min-width: 20em) {
+  .gallery-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (min-width: 34em) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 60em) {
+  .gallery-grid {
+    grid-template-columns:auto auto auto auto;
+  }
+}
+.gallery-grid img {
+  width: 100%;
+  border: 5px solid #fff;
+}
+
+.gallery-grid div {
+  position: relative;
+  cursor: pointer;
+}
+.gallery-grid div:before, .gallery-grid div:after {
+  transition: 0.3s opacity ease;
+  opacity: 0;
+}
+.gallery-grid div:after {
+  content: "↔";
+  font-size: 80px;
+  position: absolute;
+  transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+  color: #fff;
+  left: 50%;
+  top: 50%;
+  display: block;
+}
+.gallery-grid div:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  background: rgba(34, 34, 34, 0.5);
+  display: block;
+}
+.gallery-grid div:hover:before, .gallery-grid div:hover:after {
+  opacity: 1;
+  transition: 0.3s opacity ease;
+}
+
+.modalImageView {
+  position: fixed;
+  z-index: 999;
+  width: 50%;
+  max-width: 800px;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+@media (min-width: 20em) {
+  .modalImageView {
+    width: 95%;
+  }
+}
+@media (min-width: 34em) {
+  .modalImageView {
+    width: 80%;
+  }
+}
+@media (min-width: 60em) {
+  .modalImageView {
+    width: 60%;
+  }
+}
+.modalImageView img {
+  width: 100%;
+  border: 5px solid #fff;
+}
+
+.modalImageView-overlay {
+  position: fixed;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+}
+
+.modalImageView-body a {
+  position: absolute;
+  display: inline;
+  color: #222;
+  text-decoration: none;
+  line-height: 36px;
+  font-size: 30px;
+  font-weight: lighter;
+  background: #fff;
+  border-radius: 5px;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+}
+
+.modalImageView-body .modalImageView-close {
+  right: 0;
+  top: 0;
+  border-radius: 0 0 0 5px;
+}
+
+.modalImageView-body .modalImageView-next,
+.modalImageView-body .modalImageView-prev {
+  right: 0;
+  top: calc(50% - 25px);
+  border-radius: 5px 0 0 5px;
+  height: 50px;
+  line-height: 40px;
+  font-size: 60px;
+}
+
+.modalImageView-body .modalImageView-prev {
+  left: 0;
+  right: auto;
+  border-radius: 0 5px 5px 0;
+}
+
+.modalImageView-body {
+  position: relative;
+}
+/***********/
+.tableImage {
+  width: 120px;
+  height: 120px;
+}
+
+.ratingStar label i{
+  font-size: 30px !important;
+}
+.headerConatiner, .footer{
+  background-color: #345333;
+  color: #fff;
+}
+.navbar .navbar-nav .nav-item .nav-link, .navbar .navbar-brand, .footer nav > ul a:not(.btn), .copyright {
+  color: #fff !important;
+}
+.navbar .navbar-nav .nav-item .nav-link:hover, .navbar .navbar-brand:hover, .footer nav > ul a:not(.btn):hover {
+  color: #fff !important;
+}
+.form-control {
+  border: 1px solid #bbc2c9;
+}
+.main-panel {
+  color: #212529 !important;
+}
+.themeBtn {
+  background-color:  #2a9127 !important;
+  border-color: #2a9127 !important;
+  color: #fff !important;
+}
+.themeBtn:hover {
+  background-color:  #345333 !important;
+  border-color: #345333 !important;
+  color: #fff !important;
+}
+a {
+ color: #333333 !important;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  color: #2a9127 !important;
+}
+.table-hover tbody tr:hover{
+  background-color: rgb(74 203 167 / 8%);
+}
+.card label {
+  color: #212529 !important;
+}
+.card .card-title, h4{
+  color: #212529 !important;
+  font-weight: 400 !important;
+}
+.table > thead > tr > th {
+  color: #212529 !important;
+  font-size: 13px;
+}
+
+.brandName {
+  font-weight: 500;
+  position: relative;
+  top: 3px;
+}
