@@ -207,6 +207,11 @@ body {
 .main-panel {
   color: #212529 !important;
 }
+.maincontainer {
+  height: calc(100vh - 206px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 .themeBtn {
   background-color:  #2a9127 !important;
   border-color: #2a9127 !important;
@@ -217,16 +222,13 @@ body {
   border-color: #345333 !important;
   color: #fff !important;
 }
-a {
- color: #333333 !important;
-}
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
   color: #2a9127 !important;
 }
 .table-hover tbody tr:hover{
   background-color: rgb(74 203 167 / 8%);
 }
-.card label {
+.card.editForm label {
   color: #212529 !important;
 }
 .card .card-title, h4{
@@ -242,4 +244,25 @@ a {
   font-weight: 500;
   position: relative;
   top: 3px;
+}
+
+table thead tr {
+  background-color: #f8f9fa;
+  border: 1px solid transparent;
+  border-bottom-color: #ced4da;
+}
+table tr th {
+  font-weight: 600 !important;
+}
+
+.profile-value{
+  font-weight: 600;
+}
+
+.table a {
+  color: #2171b5;
+}
+.disbaleInput {
+  opacity: 0.6;
+  pointer-events: none;
 }
