@@ -44,7 +44,7 @@ const HeaderMainContainer = (props) => {
                     <span className="d-lg-block">Traders List</span>
                   </Nav.Link>
                 </Nav.Item>
-                {userRole == 2 ? <Nav.Item>
+                {userRole == 2 && loginData.OTP ? <Nav.Item>
                   <Nav.Link
                     className="m-0"
                     href="#/profile"
@@ -52,7 +52,7 @@ const HeaderMainContainer = (props) => {
                     <span className="d-lg-block">Update Profile</span>
                   </Nav.Link>
                 </Nav.Item> : null}
-                {userRole == 3 ? <Nav.Item>
+                {userRole == 3 && loginData.OTP ? <Nav.Item>
                   <Nav.Link
                     className="m-0"
                     href="#/reviewrating"
@@ -60,7 +60,7 @@ const HeaderMainContainer = (props) => {
                     <span className="d-lg-block">Verify Reviews</span>
                   </Nav.Link>
                 </Nav.Item> : null}
-                {userRole == 3 ? <Nav.Item>
+                {userRole == 3 && loginData.OTP ? <Nav.Item>
                   <Nav.Link
                     className="m-0"
                     href="#/reviewTraders"
@@ -68,7 +68,7 @@ const HeaderMainContainer = (props) => {
                     <span className="d-lg-block">Verify Traders</span>
                   </Nav.Link>
                 </Nav.Item> : null}
-                {userRole == 3 ? <Nav.Item>
+                {userRole == 3 && loginData.OTP ? <Nav.Item>
                   <Nav.Link
                     className="m-0"
                     href="#/customers"
