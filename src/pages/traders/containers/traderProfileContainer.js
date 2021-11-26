@@ -15,12 +15,12 @@ import StarRatingComponent from 'react-star-rating-component';
 
 
 
-const aadharRegex =  /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
+const aadharRegex =  /^\d{12}$/;
 
 const schema = yup.object().shape({
   fname: yup.string().required('Enter First Name'),
   lname: yup.string().required('Enter Last Name'),
-  aadharNo: yup.string().required('Enter Aadhar Number'),//.matches(aadharRegex, 'Enter Valid Aadhar Number'),
+  aadharNo: yup.string().required('Enter Aadhar Number').matches(aadharRegex, 'Enter Valid Aadhar Number'),
   address: yup.string().required('Enter Address'),
   state: yup.string().required('Select State'),
   district: yup.string().required('Enter District'),
@@ -64,7 +64,7 @@ const TraderProfileContainer = (props) => {
             "state": traderdetails.state,
             "district": traderdetails.district,
             "city": traderdetails.city,
-            "vegetables": traderdetails.vegetables,
+            "vegetables": traderdetails.vegetables || "onion,potato",
             "aadharNo": traderdetails.aadharNo,
             "company": traderdetails.company,
           })
