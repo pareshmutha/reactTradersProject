@@ -33,7 +33,7 @@ const AdminReviewTraderContainer = (props) => {
           if(response.status === 0){
             alert(response.message)
           }
-          setReviews(response.reviews || [])
+          setReviews(response.allTraders || [])
         });
       })
   }
@@ -61,10 +61,10 @@ const AdminReviewTraderContainer = (props) => {
                                         <td>{item.state || 'NA'}</td>
                                         <td>{item.district || 'NA'}</td>
                                         <td>
-                                          <Button variant="info" onClick={reviewOperation.bind(this, item.id, 1)} className="btn-fill pull-right themeBtn">Approve</Button>
+                                          <Button variant="info" onClick={reviewOperation.bind(this, item.traderId, 1)} className="btn-fill pull-right themeBtn">Approve</Button>
                                         </td>
                                         <td>
-                                          <Button variant="danger" onClick={reviewOperation.bind(this, item.id, 0)} className="btn-fill pull-right">Discard</Button>
+                                          <Button variant="danger" onClick={reviewOperation.bind(this, item.traderId, 0)} className="btn-fill pull-right">Discard</Button>
                                         </td>
                                     </tr>
                                 )
