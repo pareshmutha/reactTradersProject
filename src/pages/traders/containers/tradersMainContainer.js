@@ -1,29 +1,34 @@
-import React, {useState} from 'react';
-import {Card, Button, Image, Row, Col, Container, Form, Table} from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import {Card, Button, Row, Col, Container, Form, Table} from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
 import { useSelectors, useActions } from '../hooks';
-import vegetable1 from '../../../assets/img/vege1.jpg';
-import TraderCard from '../components/traderCard';
+import { useActions as useLoginActions } from '../../login/hooks';
+
 import { states } from '../../../utils/constants';
 
-const tradersData = [
-    {id: 1, name: "Abc", image : 'https://source.unsplash.com/PC_lbSSxCZE/800x600', number: '999999999', address: 'Laslgaon, Nashik'},
-    {id: 2, name: "Abc1", image : 'https://source.unsplash.com/PC_lbSSxCZE/800x600', number: '999999999', address: 'Laslgaon, Nashik'},
-    {id: 3, name: "Abc2", image : 'https://source.unsplash.com/PC_lbSSxCZE/800x600', number: '999999999', address: 'Laslgaon, Nashik'},
-    {id: 4, name: "Abc3", image : 'https://source.unsplash.com/PC_lbSSxCZE/800x600', number: '999999999', address: 'Laslgaon, Nashik'},
-    {id: 5, name: "Abc4", image : 'https://source.unsplash.com/PC_lbSSxCZE/800x600', number: '999999999', address: 'Laslgaon, Nashik'},
-    {id: 6, name: "Abc5", image : 'https://source.unsplash.com/PC_lbSSxCZE/800x600', number: '999999999', address: 'Laslgaon, Nashik'},
-    {id: 7, name: "Abc6", image : 'https://source.unsplash.com/PC_lbSSxCZE/800x600', number: '999999999', address: 'Laslgaon, Nashik'},
-    {id: 8, name: "Abc7", image : 'https://source.unsplash.com/PC_lbSSxCZE/800x600', number: '999999999', address: 'Laslgaon, Nashik'},
-    {id: 9, name: "Abc8", image : 'https://source.unsplash.com/PC_lbSSxCZE/800x600', number: '999999999', address: 'Laslgaon, Nashik'},
-    {id: 10, name: "Abc9", image : 'https://source.unsplash.com/PC_lbSSxCZE/800x600', number: '999999999', address: 'Laslgaon, Nashik'},
-]
 
 
 const TradersMainContainer = (props) => {
     const [districts, setDistricts] = useState([]);
-
+    const history = useHistory();
+    const { continueUserSession } = useLoginActions();
+    const { getAllTraders } = useActions();
+    const { allTraders = [] } =  useSelectors();
+    useEffect(()=>{
+      if(localStorage.getItem('usersData')) {
+          continueUserSession(JSON.parse(localStorage.getItem('usersData')));
+      }
+      getAllTraders().then(response => {
+        if(response.status != 1) {
+          alert(response.message)
+        }
+      });
+  },[continueUserSession, history, getAllTraders]);
+  const searchTraders = ()=> {
+    getAllTraders();
+  }
     return (
-        <>
+      <div className="maincontainer">
         <Container fluid className="p-3">
           <Row>
           <Card className="mt-3 w-100">
@@ -32,8 +37,9 @@ const TradersMainContainer = (props) => {
             </Card.Header>
             <Card.Body>
             <Row className="mb-3">
-                <Col md={12}>
+                <Col>
                     <Form.Group>
+                      <label>Search Query</label>
                         <Form.Control
                         defaultValue=""
                         placeholder="Enter Search Query"
@@ -41,9 +47,7 @@ const TradersMainContainer = (props) => {
                         ></Form.Control>
                     </Form.Group>
                 </Col>
-            </Row>
-            <Row>
-                  <Col className="pr-1" md="3">
+                <Col className="pr-1">
                     <Form.Group>
                         <label>State</label>
                         <Form.Select aria-label="Default select example" className="form-control" onChange={(state) => {setDistricts(states[state.target.value] || [])}}>
@@ -52,7 +56,7 @@ const TradersMainContainer = (props) => {
                       </Form.Select>
                     </Form.Group>
                   </Col>
-                  <Col className="px-1" md="3">
+                  <Col className="px-1">
                   <Form.Group>
                         <label>District</label>
                         <Form.Select aria-label="Default select example" className="form-control">
@@ -61,7 +65,7 @@ const TradersMainContainer = (props) => {
                       </Form.Select>
                     </Form.Group>
                   </Col>
-                  <Col className="pl-1" md="3">
+                  <Col className="pl-1">
                     <Form.Group>
                       <label>City</label>
                       <Form.Control
@@ -70,7 +74,7 @@ const TradersMainContainer = (props) => {
                       ></Form.Control>
                     </Form.Group>
                   </Col>
-                  <Col className="pl-1" md="3">
+                  <Col className="pl-1">
                     <Form.Group>
                       <label>Pin Code</label>
                       <Form.Control
@@ -79,55 +83,44 @@ const TradersMainContainer = (props) => {
                       ></Form.Control>
                     </Form.Group>
                   </Col>
-                </Row>
-                <Row>
-                    <div className="ml-auto mt-3 mr-2">
-                        <Button variant="info" className="btn-fill pull-right themeBtn">Search Traders</Button>
+                  <Col>
+                   <div className="ml-auto mt-4 mr-2">
+                        <Button variant="info" className="btn-fill pull-right themeBtn" onClick={searchTraders}>Search Traders</Button>
                     </div>
-                </Row>
-                <hr/>
-                <Row className="mt-3 p-3">
-                    <h4>Traders List</h4>
-                    <Table bordered hover responsive>
-                        <thead>
-                            <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Mobile Number</th>
-                            <th>Address</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {tradersData.map(item => {
-                                return (
-                                    <tr key={item.id}>
-                                        <td>{item.id}</td>
-                                        <td>{item.name}</td>
-                                        <td>{item.number}</td>
-                                        <td>{item.address}</td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </Table>
-                </Row>
+                  </Col>
+            </Row>
+                
+            <Row className="mt-1 p-2">
+                <h4>Traders List</h4>
+
+                <Table bordered hover responsive>
+                    <thead>
+                        <tr>
+                        <th>Name</th>
+                        <th>Mobile Number</th>
+                        <th>Address</th>
+                        <th>Vegetables</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {allTraders.map(item => {
+                            return (
+                                <tr key={item.id}>
+                                    <td><a href={`#/viewProfile?id=${item.traderId}`}>{`${item.fname} ${item.lname}`}</a></td>
+                                    <td>{item.phone}</td>
+                                    <td>{item.address}</td>
+                                    <td>{item.vegetables}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>
+            </Row>
             </Card.Body>
             </Card>
           </Row>
         </Container>
-            {/* <TraderCard name="Dnynaehwar Wackchaure" phone="9999999999" address="Laslgaon, Nashik" aadharno="123456789789"/>
-            <TraderCard name="Dnynaehwar Wackchaure" phone="9999999999" address="Laslgaon, Nashik" aadharno="123456789789"/>
-            <TraderCard name="Dnynaehwar Wackchaure" phone="9999999999" address="Laslgaon, Nashik" aadharno="123456789789" />
-            <TraderCard name="Dnynaehwar Wackchaure" phone="9999999999" address="Laslgaon, Nashik" aadharno="123456789789" />
-            <TraderCard name="Dnynaehwar Wackchaure" phone="9999999999" address="Laslgaon, Nashik" aadharno="123456789789" />
-            <TraderCard name="Dnynaehwar Wackchaure" phone="9999999999" address="Laslgaon, Nashik" aadharno="123456789789" />
-            <TraderCard name="Dnynaehwar Wackchaure" phone="9999999999" address="Laslgaon, Nashik" aadharno="123456789789" />
-            <TraderCard name="Dnynaehwar Wackchaure" phone="9999999999" address="Laslgaon, Nashik" aadharno="123456789789" />
-            <TraderCard name="Dnynaehwar Wackchaure" phone="9999999999" address="Laslgaon, Nashik" aadharno="123456789789" />
-            <TraderCard name="Dnynaehwar Wackchaure" phone="9999999999" address="Laslgaon, Nashik" aadharno="123456789789" /> */}
-
-
-        </>
+        </div>
     )
 }
 

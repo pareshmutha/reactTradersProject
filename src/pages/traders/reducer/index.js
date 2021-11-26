@@ -1,6 +1,9 @@
-const allCustomers = (state = {}, action) => {
+import { combineReducers } from 'redux';
+
+
+const allTraders = (state = [], action) => {
     switch (action.type) {
-        case 'All_CUSTOMERS':
+        case 'ALL_TRADERS':
             return action.payload;
         default:
             return state;
@@ -8,4 +11,8 @@ const allCustomers = (state = {}, action) => {
 };
 
 
-export default allCustomers;
+const traders = combineReducers({
+    allTraders,
+});
+
+export default traders;
