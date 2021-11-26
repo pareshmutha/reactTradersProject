@@ -1,37 +1,25 @@
 import { useSelector } from 'react-redux';
 import useActionsHook from '../../../hooks/useActions';
-import * as actions from '../actions';
+import * as actions from '../actions/homeActions';
 import useSelectorHook from '../../../hooks/useSelectors';
 
+
 export function useSelectors() {
-    const allTraders = useSelector(useSelectorHook('traders.allTraders'));
-    const usersData = useSelector(useSelectorHook('loginData.usersData.userData'));
+    const allCustomers = useSelector(useSelectorHook('allCustomers'));
     
     return {
-        allTraders,
-        usersData
+        allCustomers
     }
 }
 
 export function useActions() {
     const [
-        getAllTraders,
-        getTraderById,
-        submitReview,
-        imageUpload,
-        updateTrader,
+        fetchAllCustomers,
     ] = useActionsHook([
-        actions.getAllTraders,
-        actions.getTraderById,
-        actions.submitReview,
-        actions.imageUpload,
-        actions.updateTrader
+        actions.fetchAllCustomers,
+      
     ]);
     return {
-        getAllTraders,
-        getTraderById,
-        submitReview,
-        imageUpload,
-        updateTrader,
+        fetchAllCustomers,
     };
 }

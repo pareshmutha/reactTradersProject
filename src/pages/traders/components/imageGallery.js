@@ -5,7 +5,6 @@ const imgUrls = ['https://source.unsplash.com/PC_lbSSxCZE/800x600','https://sour
 ];
 
 const ImageGallery = (props) => {
-    const {imagesData = []} = props;
     const [currentIndex, setCurrentIndex] = useState(null);
     const openModal = (e, index) =>{
         setCurrentIndex(index);
@@ -42,15 +41,15 @@ const ImageGallery = (props) => {
     return (
       <div className="gallery-container">
         <div className="gallery-grid">
-          {imagesData.map(renderImageContent)}
+          {imgUrls.map(renderImageContent)}
         </div>
         <GalleryModal 
           closeModal={closeModal} 
           findPrev={findPrev} 
           findNext={findNext} 
           hasPrev={currentIndex > 0} 
-          hasNext={currentIndex + 1 < imagesData.length} 
-          src={imagesData[currentIndex]} 
+          hasNext={currentIndex + 1 < imgUrls.length} 
+          src={imgUrls[currentIndex]} 
         />
       </div>
     )
