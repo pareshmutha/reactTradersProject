@@ -37,8 +37,9 @@ const TradersMainContainer = (props) => {
             </Card.Header>
             <Card.Body>
             <Row className="mb-3">
-                <Col md={12}>
+                <Col>
                     <Form.Group>
+                      <label>Search Query</label>
                         <Form.Control
                         defaultValue=""
                         placeholder="Enter Search Query"
@@ -46,9 +47,7 @@ const TradersMainContainer = (props) => {
                         ></Form.Control>
                     </Form.Group>
                 </Col>
-            </Row>
-            <Row>
-                  <Col className="pr-1" md="3">
+                <Col className="pr-1">
                     <Form.Group>
                         <label>State</label>
                         <Form.Select aria-label="Default select example" className="form-control" onChange={(state) => {setDistricts(states[state.target.value] || [])}}>
@@ -57,7 +56,7 @@ const TradersMainContainer = (props) => {
                       </Form.Select>
                     </Form.Group>
                   </Col>
-                  <Col className="px-1" md="3">
+                  <Col className="px-1">
                   <Form.Group>
                         <label>District</label>
                         <Form.Select aria-label="Default select example" className="form-control">
@@ -66,7 +65,7 @@ const TradersMainContainer = (props) => {
                       </Form.Select>
                     </Form.Group>
                   </Col>
-                  <Col className="pl-1" md="3">
+                  <Col className="pl-1">
                     <Form.Group>
                       <label>City</label>
                       <Form.Control
@@ -75,7 +74,7 @@ const TradersMainContainer = (props) => {
                       ></Form.Control>
                     </Form.Group>
                   </Col>
-                  <Col className="pl-1" md="3">
+                  <Col className="pl-1">
                     <Form.Group>
                       <label>Pin Code</label>
                       <Form.Control
@@ -84,38 +83,39 @@ const TradersMainContainer = (props) => {
                       ></Form.Control>
                     </Form.Group>
                   </Col>
-                </Row>
-                <Row>
-                    <div className="ml-auto mt-3 mr-2">
+                  <Col>
+                   <div className="ml-auto mt-4 mr-2">
                         <Button variant="info" className="btn-fill pull-right themeBtn" onClick={searchTraders}>Search Traders</Button>
                     </div>
-                </Row>
-                <hr/>
-                <Row className="mt-3 p-3">
-                    <h4>Traders List</h4>
-                    <Table bordered hover responsive>
-                        <thead>
-                            <tr>
-                            <th>Name</th>
-                            <th>Mobile Number</th>
-                            <th>Address</th>
-                            <th>Vegetables</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {allTraders.map(item => {
-                                return (
-                                    <tr key={item.id}>
-                                        <td><a href={`#/viewProfile?id=${item.traderId}`}>{`${item.fname} ${item.lname}`}</a></td>
-                                        <td>{item.phone}</td>
-                                        <td>{item.address}</td>
-                                        <td>{item.vegetables}</td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </Table>
-                </Row>
+                  </Col>
+            </Row>
+                
+            <Row className="mt-1 p-2">
+                <h4>Traders List</h4>
+
+                <Table bordered hover responsive>
+                    <thead>
+                        <tr>
+                        <th>Name</th>
+                        <th>Mobile Number</th>
+                        <th>Address</th>
+                        <th>Vegetables</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {allTraders.map(item => {
+                            return (
+                                <tr key={item.id}>
+                                    <td><a href={`#/viewProfile?id=${item.traderId}`}>{`${item.fname} ${item.lname}`}</a></td>
+                                    <td>{item.phone}</td>
+                                    <td>{item.address}</td>
+                                    <td>{item.vegetables}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>
+            </Row>
             </Card.Body>
             </Card>
           </Row>
